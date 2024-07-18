@@ -20,6 +20,14 @@ class SignupView(generics.CreateAPIView):
             "message": "User created successfully.",
         }, status=status.HTTP_201_CREATED)
 
+class UserListView(generics.ListAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
+
+class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
+    lookup_field = 'id'
 
 def register_page(request):
     if request.method == "POST":
